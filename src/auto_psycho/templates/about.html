@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}关于TAT - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4">关于主题统觉测验(TAT)</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">什么是TAT？</h5>
+                <p class="card-text">
+                    主题统觉测验(Thematic Apperception Test, TAT)是由心理学家亨利·默里(Henry Murray)于1935年开发的一种投射性心理测验。
+                    它通过让被试者观看一系列模糊的图片，并要求他们编写故事来揭示其潜在的心理状态、人格特征和情感模式。
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">测验原理</h5>
+                <p class="card-text">
+                    TAT基于投射理论，认为当人们面对模糊刺激时，会将自己的内在心理状态、需求、冲突和情感投射到故事中。
+                    通过分析这些故事的内容、主题和情感色彩，可以了解被试者的：
+                </p>
+                <ul>
+                    <li>人格特征和心理需求</li>
+                    <li>情感模式和应对机制</li>
+                    <li>人际关系态度</li>
+                    <li>内在冲突和压力源</li>
+                    <li>价值观和动机</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">AI分析优势</h5>
+                <p class="card-text">
+                    我们的平台使用先进的AI技术对TAT回答进行分析，具有以下优势：
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li><strong>客观性：</strong>减少人为主观偏见</li>
+                            <li><strong>一致性：</strong>标准化分析流程</li>
+                            <li><strong>效率：</strong>快速生成分析报告</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li><strong>全面性：</strong>多维度心理分析</li>
+                            <li><strong>可重复：</strong>结果可验证和比较</li>
+                            <li><strong>便捷性：</strong>在线随时进行测验</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <h6><i class="fas fa-exclamation-triangle me-2"></i>重要提醒</h6>
+            <p class="mb-0">
+                本平台提供的AI分析结果仅供参考，不能替代专业心理咨询师的评估。
+                如果您有心理健康方面的困扰，请寻求专业心理健康服务。
+            </p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('main.register') }}" class="btn btn-primary btn-lg me-3">
+                <i class="fas fa-play me-2"></i>开始测验
+            </a>
+            <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>返回首页
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

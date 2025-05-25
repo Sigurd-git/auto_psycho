@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}继续实验 - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="mb-4 text-center">继续实验</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-redo fa-3x text-primary mb-3"></i>
+                    <p class="lead">
+                        如果您之前已经开始了TAT实验但未完成，请输入您的参与者编号继续实验。
+                    </p>
+                </div>
+
+                <form method="POST">
+                    <div class="mb-4">
+                        <label for="participant_code" class="form-label">参与者编号</label>
+                        <input type="text" class="form-control form-control-lg" id="participant_code" 
+                               name="participant_code" placeholder="例如：TAT_A1B2C3D4" required>
+                        <div class="form-text">
+                            请输入注册时获得的参与者编号，格式通常为 TAT_XXXXXXXX
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-search me-2"></i>查找并继续实验
+                        </button>
+                        <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>返回首页
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-question-circle fa-2x text-warning mb-3"></i>
+                        <h6>忘记了参与者编号？</h6>
+                        <p class="small text-muted">
+                            如果您忘记了参与者编号，可以重新注册开始新的实验。
+                        </p>
+                        <a href="{{ url_for('main.register') }}" class="btn btn-outline-warning btn-sm">
+                            重新注册
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-info-circle fa-2x text-info mb-3"></i>
+                        <h6>需要帮助？</h6>
+                        <p class="small text-muted">
+                            如果遇到技术问题或需要帮助，请查看帮助页面。
+                        </p>
+                        <a href="{{ url_for('main.help') }}" class="btn btn-outline-info btn-sm">
+                            获取帮助
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <h6><i class="fas fa-lightbulb me-2"></i>提示</h6>
+            <ul class="mb-0">
+                <li>系统会自动保存您的实验进度</li>
+                <li>您可以从上次中断的地方继续实验</li>
+                <li>如果实验已完成，将直接跳转到结果页面</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %} 

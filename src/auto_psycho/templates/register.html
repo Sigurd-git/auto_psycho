@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}参与者注册 - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="mb-4 text-center">参与者注册</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">年龄</label>
+                        <input type="number" class="form-control" id="age" name="age" min="18" max="100" required>
+                        <div class="form-text">请输入您的真实年龄（18岁以上）</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">性别</label>
+                        <select class="form-select" id="gender" name="gender" required>
+                            <option value="">请选择</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                            <option value="其他">其他</option>
+                            <option value="不愿透露">不愿透露</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="education_level" class="form-label">教育水平</label>
+                        <select class="form-select" id="education_level" name="education_level" required>
+                            <option value="">请选择</option>
+                            <option value="初中及以下">初中及以下</option>
+                            <option value="高中/中专">高中/中专</option>
+                            <option value="大专">大专</option>
+                            <option value="本科">本科</option>
+                            <option value="硕士">硕士</option>
+                            <option value="博士">博士</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="occupation" class="form-label">职业（可选）</label>
+                        <input type="text" class="form-control" id="occupation" name="occupation" placeholder="例如：学生、教师、工程师等">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contact_info" class="form-label">联系方式（可选）</label>
+                        <input type="text" class="form-control" id="contact_info" name="contact_info" placeholder="邮箱或电话（用于后续联系）">
+                        <div class="form-text">此信息仅用于研究联系，严格保密</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">知情同意</h6>
+                                <p class="card-text small">
+                                    我已阅读并理解本研究的目的、过程、风险和收益。我了解参与是自愿的，
+                                    可以随时退出。我同意参与本研究，并同意研究团队使用我的数据进行学术研究。
+                                </p>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="consent_given" name="consent_given" required>
+                                    <label class="form-check-label" for="consent_given">
+                                        <strong>我已阅读并同意<a href="{{ url_for('main.consent') }}" target="_blank">知情同意书</a></strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>注册并开始实验
+                        </button>
+                        <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>返回首页
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <h6><i class="fas fa-info-circle me-2"></i>温馨提示</h6>
+            <ul class="mb-0">
+                <li>注册后您将获得一个唯一的参与者编号，请妥善保存</li>
+                <li>如果实验过程中断，可以使用参与者编号继续实验</li>
+                <li>所有信息都将严格保密，仅用于研究目的</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %} 

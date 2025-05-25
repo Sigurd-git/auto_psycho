@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}帮助中心 - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4 text-center">帮助中心</h1>
+        
+        <div class="accordion" id="helpAccordion">
+            <!-- 常见问题 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#faqCollapse">
+                        <i class="fas fa-question-circle me-2"></i>常见问题
+                    </button>
+                </h2>
+                <div id="faqCollapse" class="accordion-collapse collapse show" 
+                     data-bs-parent="#helpAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Q: TAT实验需要多长时间？</h6>
+                                <p class="small">A: 通常需要60-90分钟，具体时间因个人回答详细程度而异。</p>
+                                
+                                <h6>Q: 可以暂停实验吗？</h6>
+                                <p class="small">A: 可以，系统会自动保存进度，使用参与者编号可以继续实验。</p>
+                                
+                                <h6>Q: 分析结果准确吗？</h6>
+                                <p class="small">A: AI分析基于科学的心理学理论，但仅供参考，不能替代专业评估。</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Q: 数据会被保密吗？</h6>
+                                <p class="small">A: 是的，我们严格遵守隐私保护原则，所有数据都会安全保存。</p>
+                                
+                                <h6>Q: 可以重复参与吗？</h6>
+                                <p class="small">A: 为保证数据质量，建议每人只参与一次实验。</p>
+                                
+                                <h6>Q: 忘记参与者编号怎么办？</h6>
+                                <p class="small">A: 可以重新注册开始新的实验，或联系技术支持。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术支持 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="techHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#techCollapse">
+                        <i class="fas fa-tools me-2"></i>技术支持
+                    </button>
+                </h2>
+                <div id="techCollapse" class="accordion-collapse collapse" 
+                     data-bs-parent="#helpAccordion">
+                    <div class="accordion-body">
+                        <h6>系统要求</h6>
+                        <ul>
+                            <li>现代浏览器（Chrome、Firefox、Safari、Edge）</li>
+                            <li>稳定的网络连接</li>
+                            <li>JavaScript已启用</li>
+                            <li>推荐使用电脑或平板设备</li>
+                        </ul>
+                        
+                        <h6>常见技术问题</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>页面加载缓慢：</strong></p>
+                                <ul class="small">
+                                    <li>检查网络连接</li>
+                                    <li>刷新页面重试</li>
+                                    <li>清除浏览器缓存</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>无法提交回答：</strong></p>
+                                <ul class="small">
+                                    <li>确保故事内容不为空</li>
+                                    <li>检查网络连接状态</li>
+                                    <li>尝试重新登录</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 实验指导 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="guideHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#guideCollapse">
+                        <i class="fas fa-book me-2"></i>实验指导
+                    </button>
+                </h2>
+                <div id="guideCollapse" class="accordion-collapse collapse" 
+                     data-bs-parent="#helpAccordion">
+                    <div class="accordion-body">
+                        <h6>如何编写好的TAT故事</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>故事要素：</strong></p>
+                                <ul>
+                                    <li>描述图片中发生的事情</li>
+                                    <li>人物的想法和感受</li>
+                                    <li>事件的前因后果</li>
+                                    <li>故事的结局</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>写作建议：</strong></p>
+                                <ul>
+                                    <li>诚实表达内心想法</li>
+                                    <li>故事长度适中（100-300字）</li>
+                                    <li>发挥想象力和创造力</li>
+                                    <li>不要过度思考"正确答案"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-lightbulb me-2"></i>温馨提示</h6>
+                            <p class="mb-0">
+                                TAT没有标准答案，请根据您看到图片的第一印象自然地编写故事。
+                                您的真实想法和感受是最宝贵的数据。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 隐私政策 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="privacyHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#privacyCollapse">
+                        <i class="fas fa-shield-alt me-2"></i>隐私政策
+                    </button>
+                </h2>
+                <div id="privacyCollapse" class="accordion-collapse collapse" 
+                     data-bs-parent="#helpAccordion">
+                    <div class="accordion-body">
+                        <h6>数据收集</h6>
+                        <p>我们收集的信息包括：</p>
+                        <ul>
+                            <li>基本人口统计学信息（年龄、性别、教育水平等）</li>
+                            <li>TAT故事回答内容</li>
+                            <li>回答时间和行为数据</li>
+                            <li>可选的联系方式</li>
+                        </ul>
+                        
+                        <h6>数据使用</h6>
+                        <ul>
+                            <li>生成个性化心理分析报告</li>
+                            <li>改进AI分析算法</li>
+                            <li>学术研究和论文发表</li>
+                            <li>平台功能优化</li>
+                        </ul>
+                        
+                        <h6>数据保护</h6>
+                        <ul>
+                            <li>所有数据采用加密存储</li>
+                            <li>严格的访问控制和权限管理</li>
+                            <li>定期安全审计和漏洞扫描</li>
+                            <li>符合相关法律法规要求</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系方式 -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-envelope me-2"></i>联系我们
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6><i class="fas fa-bug me-2"></i>技术支持</h6>
+                        <p class="small">
+                            邮箱：support@autopsycho.com<br>
+                            响应时间：24小时内
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><i class="fas fa-flask me-2"></i>研究咨询</h6>
+                        <p class="small">
+                            邮箱：research@autopsycho.com<br>
+                            学术合作和研究相关问题
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><i class="fas fa-shield-alt me-2"></i>隐私问题</h6>
+                        <p class="small">
+                            邮箱：privacy@autopsycho.com<br>
+                            数据保护和隐私相关问题
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+                <i class="fas fa-arrow-left me-2"></i>返回首页
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}参与统计 - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4 text-center">平台参与统计</h1>
+        
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-2x text-primary mb-3"></i>
+                        <h3 class="text-primary">{{ stats.total_participants }}</h3>
+                        <p class="mb-0">总参与者</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-check-circle fa-2x text-success mb-3"></i>
+                        <h3 class="text-success">{{ stats.completed_sessions }}</h3>
+                        <p class="mb-0">完成实验</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-clock fa-2x text-warning mb-3"></i>
+                        <h3 class="text-warning">{{ stats.active_sessions }}</h3>
+                        <p class="mb-0">进行中</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-percentage fa-2x text-info mb-3"></i>
+                        <h3 class="text-info">{{ "%.1f"|format(stats.completion_rate) }}%</h3>
+                        <p class="mb-0">完成率</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2"></i>平台使用情况
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>实验完成情况</h6>
+                        <div class="progress mb-3" style="height: 25px;">
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: {{ stats.completion_rate }}%">
+                                {{ "%.1f"|format(stats.completion_rate) }}% 已完成
+                            </div>
+                        </div>
+                        
+                        <h6>参与者分布</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-circle text-success me-2"></i>完成实验：{{ stats.completed_sessions }} 人</li>
+                            <li><i class="fas fa-circle text-warning me-2"></i>进行中：{{ stats.active_sessions }} 人</li>
+                            <li><i class="fas fa-circle text-secondary me-2"></i>其他状态：{{ stats.total_participants - stats.completed_sessions - stats.active_sessions }} 人</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>平台特色</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-robot text-primary me-2"></i>AI智能分析</li>
+                            <li><i class="fas fa-shield-alt text-success me-2"></i>隐私保护</li>
+                            <li><i class="fas fa-chart-line text-info me-2"></i>详细报告</li>
+                            <li><i class="fas fa-clock text-warning me-2"></i>在线便捷</li>
+                        </ul>
+                        
+                        <h6>研究价值</h6>
+                        <p class="small text-muted">
+                            您的参与为心理学研究和AI技术发展做出了重要贡献，
+                            帮助我们更好地理解人类心理和改进分析算法。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>关于数据使用
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>数据安全</h6>
+                        <ul class="small">
+                            <li>所有数据采用加密存储</li>
+                            <li>严格的访问控制机制</li>
+                            <li>定期安全审计和备份</li>
+                            <li>符合数据保护法规要求</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>研究用途</h6>
+                        <ul class="small">
+                            <li>心理学理论研究</li>
+                            <li>AI算法优化改进</li>
+                            <li>学术论文发表</li>
+                            <li>心理健康服务改善</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-3 mb-0">
+                    <small>
+                        <i class="fas fa-lock me-2"></i>
+                        所有统计数据均为匿名化处理，不包含任何个人身份信息。
+                        我们严格遵守心理学研究伦理和数据保护原则。
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('main.register') }}" class="btn btn-success btn-lg me-3">
+                <i class="fas fa-play me-2"></i>参与实验
+            </a>
+            <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>返回首页
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

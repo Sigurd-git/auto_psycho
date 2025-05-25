@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% set page_title = "TAT实验进行中" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Progress Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="mb-2">TAT实验进行中</h2>
+                            <p class="text-muted mb-0">
+                                图片 {{ current_index + 1 }} / {{ total_images }}
+                                {% if session_info %}
+                                | 参与者: {{ session_info.participant_code }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-primary" role="progressbar" 
+                                     style="width: {{ progress }}%;" 
+                                     aria-valuenow="{{ progress }}" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100">
+                                </div>
+                            </div>
+                            <small class="text-muted">完成度: {{ "%.1f"|format(progress) }}%</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Experiment Card -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Image Section -->
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <div class="card border-0 bg-light">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-image me-2"></i>TAT图片 {{ current_index + 1 }}
+                                    </h5>
+                                </div>
+                                <div class="card-body text-center p-4">
+                                    <div class="position-relative">
+                                        <img src="{{ url_for('static', filename='images/tat/' + current_image) }}" 
+                                             alt="TAT Image {{ current_index + 1 }}" 
+                                             class="img-fluid rounded shadow"
+                                             style="max-height: 400px; object-fit: contain;">
+                                        <div class="mt-3">
+                                            <small class="text-muted">{{ current_image }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Timer Display -->
+                            <div class="card border-0 bg-light mt-3">
+                                <div class="card-body text-center">
+                                    <h6 class="mb-2">用时</h6>
+                                    <div class="h4 text-primary mb-0" id="timer">00:00</div>
+                                    <small class="text-muted">建议用时: 3-5分钟</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Story Input Section -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-pen me-2"></i>编写您的故事
+                                    </h5>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <form id="storyForm" class="flex-grow-1 d-flex flex-column">
+                                        <input type="hidden" id="imageIndex" value="{{ current_index }}">
+                                        <input type="hidden" id="responseTime" value="0">
+                                        
+                                        <div class="mb-3">
+                                            <label for="storyText" class="form-label">
+                                                <strong>请根据图片编写一个故事：</strong>
+                                            </label>
+                                            <textarea class="form-control flex-grow-1" 
+                                                      id="storyText" 
+                                                      name="story_text" 
+                                                      rows="12" 
+                                                      placeholder="请描述图片中发生的故事...&#10;&#10;包括：&#10;• 图片中发生了什么？&#10;• 人物的想法和感受？&#10;• 导致这种情况的原因？&#10;• 事情的结果会怎样？&#10;&#10;没有标准答案，请发挥您的想象力！"
+                                                      required
+                                                      minlength="20"></textarea>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center">
+                                                    <small class="text-muted me-2">字数:</small>
+                                                    <span id="charCount" class="badge bg-secondary">0</span>
+                                                    <small class="text-muted ms-2">(最少20字符)</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <button type="submit" 
+                                                        class="btn btn-primary btn-lg"
+                                                        id="submitBtn"
+                                                        disabled>
+                                                    <i class="fas fa-arrow-right me-2"></i>提交故事
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Card -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="text-info">
+                                <i class="fas fa-lightbulb me-2"></i>写作提示
+                            </h6>
+                            <ul class="list-unstyled small">
+                                <li>• 描述图片中的情景</li>
+                                <li>• 想象人物的内心世界</li>
+                                <li>• 添加故事的背景</li>
+                                <li>• 预测故事的结局</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-warning">
+                                <i class="fas fa-clock me-2"></i>时间建议
+                            </h6>
+                            <ul class="list-unstyled small">
+                                <li>• 观察图片: 30秒</li>
+                                <li>• 构思故事: 1-2分钟</li>
+                                <li>• 编写故事: 2-3分钟</li>
+                                <li>• 检查修改: 30秒</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-success">
+                                <i class="fas fa-check me-2"></i>质量标准
+                            </h6>
+                            <ul class="list-unstyled small">
+                                <li>• 故事完整有逻辑</li>
+                                <li>• 包含情感描述</li>
+                                <li>• 至少20个字符</li>
+                                <li>• 真实表达想法</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">正在处理...</span>
+                </div>
+                <h5>正在提交您的故事...</h5>
+                <p class="text-muted mb-0">请稍候，不要关闭页面</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Timer functionality
+let startTime = Date.now();
+let timerInterval;
+
+function updateTimer() {
+    const elapsed = Date.now() - startTime;
+    const minutes = Math.floor(elapsed / 60000);
+    const seconds = Math.floor((elapsed % 60000) / 1000);
+    
+    document.getElementById('timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    // Update response time hidden field
+    document.getElementById('responseTime').value = elapsed / 1000;
+}
+
+// Start timer
+timerInterval = setInterval(updateTimer, 1000);
+
+// Character count functionality
+const storyText = document.getElementById('storyText');
+const charCount = document.getElementById('charCount');
+const submitBtn = document.getElementById('submitBtn');
+
+function updateCharCount() {
+    const count = storyText.value.length;
+    charCount.textContent = count;
+    
+    if (count >= 20) {
+        charCount.className = 'badge bg-success';
+        submitBtn.disabled = false;
+    } else {
+        charCount.className = 'badge bg-secondary';
+        submitBtn.disabled = true;
+    }
+}
+
+storyText.addEventListener('input', updateCharCount);
+
+// Form submission
+document.getElementById('storyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('story_text', storyText.value);
+    formData.append('image_index', document.getElementById('imageIndex').value);
+    formData.append('response_time', document.getElementById('responseTime').value);
+    
+    // Show loading modal
+    const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
+    loadingModal.show();
+    
+    // Stop timer
+    clearInterval(timerInterval);
+    
+    // Submit form
+    fetch('{{ url_for("experiment.submit_response") }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        loadingModal.hide();
+        
+        if (data.success) {
+            if (data.completed) {
+                // Redirect to results page
+                window.location.href = data.redirect_url;
+            } else {
+                // Reload page for next image
+                window.location.reload();
+            }
+        } else {
+            alert('错误: ' + (data.error || '提交失败，请重试'));
+        }
+    })
+    .catch(error => {
+        loadingModal.hide();
+        console.error('Error:', error);
+        alert('网络错误，请检查连接后重试');
+    });
+});
+
+// Auto-save functionality (every 30 seconds)
+setInterval(function() {
+    const text = storyText.value;
+    if (text.length > 0) {
+        localStorage.setItem('tat_story_backup_{{ current_index }}', text);
+    }
+}, 30000);
+
+// Restore from backup if available
+window.addEventListener('load', function() {
+    const backup = localStorage.getItem('tat_story_backup_{{ current_index }}');
+    if (backup && storyText.value === '') {
+        storyText.value = backup;
+        updateCharCount();
+    }
+});
+
+// Clear backup on successful submission
+window.addEventListener('beforeunload', function() {
+    if (submitBtn.disabled === false) {
+        localStorage.removeItem('tat_story_backup_{{ current_index }}');
+    }
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+{% set page_title = "实验结果" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Completion Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h1 class="card-title h2 mb-2 text-success">实验完成！</h1>
+                    <p class="card-text text-muted">感谢您参与TAT主题统觉测验</p>
+                    {% if session_info %}
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <small class="text-muted">参与者编号:</small><br>
+                                    <strong>{{ session_info.participant_code }}</strong>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">完成时间:</small><br>
+                                    <strong>{{ experiment_session.end_time.strftime('%Y-%m-%d %H:%M') if experiment_session.end_time else '刚刚' }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Session Summary -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>实验总结
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="h2 text-primary">{{ responses|length }}</div>
+                                <small class="text-muted">完成图片数</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="h2 text-success">
+                                    {% set total_words = responses|sum(attribute='word_count') %}
+                                    {{ total_words }}
+                                </div>
+                                <small class="text-muted">总字数</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="h2 text-info">
+                                    {% if experiment_session.total_duration %}
+                                        {{ (experiment_session.total_duration // 60) }}分{{ (experiment_session.total_duration % 60) }}秒
+                                    {% else %}
+                                        --
+                                    {% endif %}
+                                </div>
+                                <small class="text-muted">总用时</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="h2 text-warning">
+                                    {% if responses|length > 0 %}
+                                        {{ "%.1f"|format((responses|sum(attribute='word_count')) / responses|length) }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </div>
+                                <small class="text-muted">平均字数</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Analysis Section -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-brain me-2"></i>AI心理分析
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if analysis_results %}
+                        <!-- Analysis Results Display -->
+                        {% for analysis in analysis_results %}
+                        <div class="card border-0 bg-light mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title text-primary">
+                                            {{ analysis.analysis_type|title }}分析报告
+                                        </h5>
+                                        <p class="text-muted mb-2">
+                                            生成时间: {{ analysis.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <span class="badge bg-success">
+                                            置信度: {{ "%.1f"|format(analysis.confidence_score * 100) }}%
+                                        </span>
+                                        <div class="mt-2">
+                                            <a href="{{ url_for('experiment.download_report', analysis_id=analysis.id) }}" 
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-download me-1"></i>下载报告
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="analysis-content mt-3">
+                                    <div class="row">
+                                        {% if analysis.themes %}
+                                        <div class="col-md-4">
+                                            <h6 class="text-info">主要主题</h6>
+                                            <ul class="list-unstyled small">
+                                                {% for theme in analysis.themes.split(',')[:5] %}
+                                                <li><i class="fas fa-tag text-muted me-1"></i>{{ theme.strip() }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        {% if analysis.personality_traits %}
+                                        <div class="col-md-4">
+                                            <h6 class="text-warning">个性特征</h6>
+                                            <ul class="list-unstyled small">
+                                                {% for trait in analysis.personality_traits.split(',')[:5] %}
+                                                <li><i class="fas fa-user text-muted me-1"></i>{{ trait.strip() }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        {% if analysis.emotional_patterns %}
+                                        <div class="col-md-4">
+                                            <h6 class="text-danger">情感模式</h6>
+                                            <ul class="list-unstyled small">
+                                                {% for emotion in analysis.emotional_patterns.split(',')[:5] %}
+                                                <li><i class="fas fa-heart text-muted me-1"></i>{{ emotion.strip() }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <!-- No Analysis Yet -->
+                        <div class="text-center py-4">
+                            <i class="fas fa-robot text-muted" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3 mb-3">AI分析还未生成</h5>
+                            <p class="text-muted mb-4">
+                                点击下方按钮生成您的个性化心理分析报告
+                            </p>
+                            <button id="analyzeBtn" class="btn btn-success btn-lg">
+                                <i class="fas fa-magic me-2"></i>生成AI分析报告
+                            </button>
+                            <div id="analysisProgress" class="mt-3" style="display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                         role="progressbar" style="width: 100%">
+                                        AI正在分析中...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Response Details -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-file-alt me-2"></i>您的回答详情
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% for response in responses %}
+                    <div class="card border-0 bg-light mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6 class="card-title">
+                                        图片 {{ response.image_index + 1 }}: {{ response.image_filename }}
+                                    </h6>
+                                    <p class="card-text">{{ response.story_text }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <small class="text-muted">
+                                        <strong>字数:</strong> {{ response.word_count }}<br>
+                                        <strong>用时:</strong> {{ "%.1f"|format(response.response_time) }}秒<br>
+                                        <strong>时间:</strong> {{ response.created_at.strftime('%H:%M:%S') }}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-home me-2"></i>返回首页
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{{ url_for('main.statistics') }}" class="btn btn-outline-info btn-lg">
+                                <i class="fas fa-chart-pie me-2"></i>查看统计
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-top">
+                        <p class="text-muted mb-2">
+                            <i class="fas fa-info-circle me-1"></i>
+                            您的参与者编号是：<code>{{ session_info.participant_code if session_info else experiment_session.participant.participant_code }}</code>
+                        </p>
+                        <small class="text-muted">
+                            请保存此编号，您可以随时使用它来查看您的实验结果。
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// AI Analysis functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const progressDiv = document.getElementById('analysisProgress');
+    
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', function() {
+            // Disable button and show progress
+            analyzeBtn.disabled = true;
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>正在生成...';
+            progressDiv.style.display = 'block';
+            
+            // Send analysis request
+            fetch('{{ url_for("experiment.analyze_responses") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Reload page to show results
+                    window.location.reload();
+                } else {
+                    alert('分析生成失败: ' + (data.error || '未知错误'));
+                    // Reset button
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.innerHTML = '<i class="fas fa-magic me-2"></i>生成AI分析报告';
+                    progressDiv.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('网络错误，请稍后重试');
+                // Reset button
+                analyzeBtn.disabled = false;
+                analyzeBtn.innerHTML = '<i class="fas fa-magic me-2"></i>生成AI分析报告';
+                progressDiv.style.display = 'none';
+            });
+        });
+    }
+});
+</script>
+{% endblock %} 

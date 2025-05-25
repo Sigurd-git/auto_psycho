@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}知情同意书 - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4">知情同意书</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">研究项目：基于AI的在线TAT心理测验</h5>
+                
+                <h6 class="mt-4">研究目的</h6>
+                <p>
+                    本研究旨在通过在线TAT测验收集心理数据，并使用人工智能技术进行分析，
+                    为参与者提供心理状态评估和个性化建议。同时，这些数据将用于改进AI分析算法的准确性。
+                </p>
+
+                <h6 class="mt-4">参与内容</h6>
+                <ul>
+                    <li>填写基本人口统计学信息（年龄、性别、教育水平等）</li>
+                    <li>观看10张TAT图片并为每张图片编写故事</li>
+                    <li>整个过程预计需要60-90分钟</li>
+                    <li>接受AI系统对您回答的心理分析</li>
+                </ul>
+
+                <h6 class="mt-4">风险与收益</h6>
+                <p><strong>风险：</strong></p>
+                <ul>
+                    <li>参与本研究的风险极小，主要是可能引起轻微的心理不适</li>
+                    <li>如果在测验过程中感到不适，您可以随时停止参与</li>
+                </ul>
+                <p><strong>收益：</strong></p>
+                <ul>
+                    <li>获得免费的个性化心理分析报告</li>
+                    <li>增进对自己心理状态的了解</li>
+                    <li>为心理学研究做出贡献</li>
+                </ul>
+
+                <h6 class="mt-4">隐私保护</h6>
+                <ul>
+                    <li>您的个人身份信息将被严格保密</li>
+                    <li>所有数据将使用匿名编号进行处理</li>
+                    <li>研究数据仅用于学术研究目的</li>
+                    <li>您有权随时要求删除您的数据</li>
+                    <li>数据将安全存储，采用加密技术保护</li>
+                </ul>
+
+                <h6 class="mt-4">自愿参与</h6>
+                <ul>
+                    <li>参与本研究完全自愿</li>
+                    <li>您可以随时退出研究，无需说明理由</li>
+                    <li>退出研究不会对您产生任何不利影响</li>
+                    <li>您可以选择不回答任何让您感到不适的问题</li>
+                </ul>
+
+                <h6 class="mt-4">联系信息</h6>
+                <p>
+                    如果您对本研究有任何疑问或需要帮助，请联系：<br>
+                    研究团队邮箱：research@autopsycho.com<br>
+                    技术支持邮箱：support@autopsycho.com
+                </p>
+
+                <div class="alert alert-info mt-4">
+                    <h6><i class="fas fa-info-circle me-2"></i>重要提醒</h6>
+                    <p class="mb-0">
+                        本研究提供的心理分析结果仅供参考，不能替代专业心理咨询。
+                        如果您有严重的心理健康问题，请寻求专业心理健康服务。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('main.register') }}" class="btn btn-success btn-lg me-3">
+                <i class="fas fa-check me-2"></i>我同意参与研究
+            </a>
+            <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>返回首页
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

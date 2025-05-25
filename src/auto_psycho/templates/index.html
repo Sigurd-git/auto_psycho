@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - Auto Psycho TAT Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary mb-3">
+                <i class="fas fa-brain me-3"></i>Auto Psycho TAT
+            </h1>
+            <p class="lead text-muted">
+                基于人工智能的在线主题统觉测验(TAT)平台
+            </p>
+            <p class="text-muted">
+                通过AI分析您的TAT回答，生成专业的心理分析报告
+            </p>
+        </div>
+
+        <!-- Action Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-user-plus fa-3x text-success"></i>
+                        </div>
+                        <h5 class="card-title">开始新实验</h5>
+                        <p class="card-text">
+                            首次参与TAT实验，注册并开始您的心理探索之旅
+                        </p>
+                        <a href="{{ url_for('main.register') }}" class="btn btn-success btn-lg">
+                            <i class="fas fa-play me-2"></i>开始实验
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-redo fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">继续实验</h5>
+                        <p class="card-text">
+                            已有参与者编号？继续您未完成的TAT实验
+                        </p>
+                        <a href="{{ url_for('main.continue_session') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-right me-2"></i>继续实验
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row g-4 mb-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">平台特色</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-robot fa-2x text-info"></i>
+                    </div>
+                    <h5>AI智能分析</h5>
+                    <p class="text-muted small">
+                        使用GPT-4模型进行专业心理分析，提供科学的评估结果
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-shield-alt fa-2x text-warning"></i>
+                    </div>
+                    <h5>隐私保护</h5>
+                    <p class="text-muted small">
+                        严格遵守心理学研究伦理，保护参与者隐私和数据安全
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-chart-line fa-2x text-success"></i>
+                    </div>
+                    <h5>详细报告</h5>
+                    <p class="text-muted small">
+                        生成多维度心理分析报告，包含人格特征和发展建议
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>关于TAT测验
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-3">
+                    主题统觉测验(Thematic Apperception Test, TAT)是一种经典的投射性心理测验，
+                    通过让参与者观看模糊的图片并编写故事来了解其内在的心理状态、人格特征和情感模式。
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-clock me-2"></i>测验时长</h6>
+                        <p class="small text-muted">约60-90分钟</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-images me-2"></i>图片数量</h6>
+                        <p class="small text-muted">10张TAT图片</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline-primary">
+                        了解更多
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="row g-3">
+            <div class="col-md-3">
+                <a href="{{ url_for('main.consent') }}" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-file-contract me-2"></i>知情同意书
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{{ url_for('main.statistics') }}" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-chart-bar me-2"></i>参与统计
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{{ url_for('main.help') }}" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-question-circle me-2"></i>帮助中心
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-cog me-2"></i>管理后台
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

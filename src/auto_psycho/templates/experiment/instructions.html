@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% set page_title = "实验说明" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-clipboard-list text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <h1 class="card-title h2 mb-2">主题统觉测验 (TAT) 实验说明</h1>
+                    <p class="card-text text-muted">欢迎参与我们的心理学研究实验</p>
+                </div>
+            </div>
+
+            <!-- Session Info -->
+            {% if session_info %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>参与者编号:</strong> {{ session_info.participant_code }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>会话编号:</strong> {{ session_info.session_code }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Instructions Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>实验说明
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">实验目的</h5>
+                            <p class="mb-4">
+                                主题统觉测验(TAT)是一种投射性心理测验，通过让您观看图片并编写故事，
+                                帮助我们了解您的想象力、创造力和心理特征。这项测验在心理学研究中
+                                具有重要的科学价值。
+                            </p>
+
+                            <h5 class="text-primary mb-3">实验流程</h5>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ol class="list-group list-group-flush">
+                                        <li class="list-group-item border-0 px-0">
+                                            <strong>1. 观看图片</strong><br>
+                                            <small class="text-muted">系统将依次显示一系列图片</small>
+                                        </li>
+                                        <li class="list-group-item border-0 px-0">
+                                            <strong>2. 编写故事</strong><br>
+                                            <small class="text-muted">根据图片内容发挥想象力编写故事</small>
+                                        </li>
+                                        <li class="list-group-item border-0 px-0">
+                                            <strong>3. 提交回答</strong><br>
+                                            <small class="text-muted">完成故事后点击提交按钮</small>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="col-lg-6">
+                                    <ol class="list-group list-group-flush" start="4">
+                                        <li class="list-group-item border-0 px-0">
+                                            <strong>4. 继续下一张</strong><br>
+                                            <small class="text-muted">系统自动进入下一张图片</small>
+                                        </li>
+                                        <li class="list-group-item border-0 px-0">
+                                            <strong>5. 完成实验</strong><br>
+                                            <small class="text-muted">完成所有图片的故事编写</small>
+                                        </li>
+                                        <li class="list-group-item border-0 px-0">
+                                            <strong>6. 查看结果</strong><br>
+                                            <small class="text-muted">获得AI生成的心理分析报告</small>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guidelines Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>编写指导
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-success mb-3">故事应该包含：</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>图片中发生了什么事情？</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>人物的想法和感受是什么？</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>导致这种情况的原因是什么？</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>事情的结果会是怎样？</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-info mb-3">注意事项：</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>发挥您的想象力，没有标准答案</li>
+                                <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>故事长度至少20个字符</li>
+                                <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>请用中文编写故事</li>
+                                <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>诚实表达您的想法</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-shield-alt me-2"></i>隐私保护
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning mb-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>重要提醒：</strong>您的所有回答将被严格保密，仅用于学术研究目的。
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="fas fa-lock text-warning me-2"></i>个人信息将被匿名化处理</li>
+                        <li class="mb-2"><i class="fas fa-lock text-warning me-2"></i>数据将安全存储，不会泄露给第三方</li>
+                        <li class="mb-2"><i class="fas fa-lock text-warning me-2"></i>您有权随时退出实验</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <p class="text-muted mb-4">
+                        请确保您已经仔细阅读并理解了实验说明。
+                        <br>
+                        如果您准备好了，请点击下方按钮开始实验。
+                    </p>
+                    
+                    <form method="POST" action="{{ url_for('experiment.start_experiment') }}" class="d-inline">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <i class="fas fa-play me-2"></i>开始实验
+                        </button>
+                    </form>
+                    
+                    <div class="mt-3">
+                        <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>返回首页
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
